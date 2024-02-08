@@ -5,12 +5,14 @@ console.log("Hello World from Typescript!");
 
 
 
+
 //! Types in TS
 /*  
  *  unknown, any, never
  *  null, void(undefined)
  *  any(number(number enum), bigInt, boolean, string(string enum), symbol(unique symbol), object(array(tuples), function, constructor))
  */
+
 
 
 
@@ -23,10 +25,12 @@ console.log("Hello World from Typescript!");
 
 
 
+
 //! Type Innotation
 /*
 * let userId:number = 33.5
 */
+
 
 
 
@@ -37,7 +41,6 @@ console.log("Hello World from Typescript!");
 // always include them. You can configure ESLint .eslintrc.json to emit an error if a
 // function is missing a return type by setting this rule:
 // write a function to add 2 nums:
-
 
 function someFunc(){
     return "hola"
@@ -88,11 +91,14 @@ const doubled1 = numbers1.map((n):number => n * 2); // double each number
 
 
 
+
 //! Objects
 function createUser():{name: string, age: number, sex: string}{
     return {name: "ali", age: 30, sex: "male"}
 }
 console.log(createUser());
+
+
 
 
 
@@ -107,6 +113,8 @@ function createUser1(obj: User): User{
     return {name: obj.name, age: obj.age, sex: "male"}
 }
 console.log(createUser1({name:"ali", age:30}));
+
+
 
 
 
@@ -133,6 +141,8 @@ function getDbId(id: number|string){
 }
 getDbId(1);
 console.log(getDbId("1"));
+
+
 
 
 //! Arrays:
@@ -188,7 +198,6 @@ const [title1, published1] = newBook1();
 
 
 //! Interface
-
 interface Student1{
     readonly name: string,
     email: string,
@@ -233,7 +242,100 @@ const std: Student2 = {
 // console.log(std.bye());
 
 
-//! 
-//! 
+
+
+
+//! Private(Getter, Setter), Protected, Public
+class Boss1 {
+    private _sex:string = "male";
+    protected _uni:string = "Comsats"
+    constructor(readonly name:string, private _email:string){
+        this.name = name;
+        this._email = _email;
+    }
+    get getEmail(): string {
+        return `Email = ${this._email}`;
+    }
+    set setEmail(email: string) {
+        this._email = email;
+    }
+    set setUni(uni: string) {
+        this._uni = uni;
+    }
+    private noAccess(): void {
+        console.log("Inside class only");
+    }
+}
+class Boss2 extends Boss1{
+    role:string = "X-Box"
+}
+
+
+const b1 = new Boss1("ali", "a@gmail.com");
+console.log(b1.name);
+console.log(b1.getEmail);
+b1.setEmail = "ha5403905@gmail.com";
+console.log(b1);
+
+const b2 = new Boss2("ali", "a@gmail.com");
+console.log(b2);
+
+
+
+
+
+
+//! Abstract Class
+// classes with no objectss
+// class can implements interface
+// class extends class
+// interface extends interface
+
+abstract class takePhoto{
+    constructor(
+        public cameraMode: string,
+        public filter: string,
+    ){}
+    abstract getName(): string
+}
+class Instagram extends takePhoto{
+    constructor(
+        public cameraMode: string,
+        public filter: string,
+        public name: string
+        ){
+        super(cameraMode, filter)
+    }
+    getName(): string {
+        return this.name
+    }
+}
+const tp = new Instagram("test","test","ali");
+console.log(tp.getName());
+
+
+
+
+//! Type Narrowing
+//! InstanceOf & Type Predicates
+type fish = {swim: ()=>void};
+type bird = {fly: ()=>void};
+
+function isFish(pet:fish|bird):pet is fish{
+    return (pet as fish).swim !== undefined
+}
+
+function getFood(pet: fish|bird){
+    if(isFish(pet)){
+        pet 
+        return "fish food"
+    } else {
+        pet 
+        return "bird food"
+    }
+}
+
+//! Discriminated Union and Exhaustiveness Checking with never
+
 
 

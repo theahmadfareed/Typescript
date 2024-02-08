@@ -1,3 +1,18 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 console.log("Hello World from Typescript!");
 // Data Types.
 // let variableName:type = value
@@ -128,17 +143,105 @@ var std = {
         return "Hello from Interfaces!";
     },
     bye: function () {
-        return "Hello from Interfaces!";
+        return "Bye from Interfaces!";
     }
 };
-console.log(std);
-console.log(std.name);
-console.log(std.age);
-console.log(std.email);
-console.log(std.sex);
-console.log(std.startTrial());
-console.log(std.getCoupon(std.name, 1));
-console.log(std.hello());
-console.log(std.bye());
+// console.log(std);
+// console.log(std.name);
+// console.log(std.age);
+// console.log(std.email);
+// console.log(std.sex);
+// console.log(std.startTrial());
+// console.log(std.getCoupon(std.name,1));
+// console.log(std.hello());
+// console.log(std.bye());
+//! Private(Getter, Setter), Protected, Public
+var Boss1 = /** @class */ (function () {
+    function Boss1(name, _email) {
+        this.name = name;
+        this._email = _email;
+        this._sex = "male";
+        this._uni = "Comsats";
+        this.name = name;
+        this._email = _email;
+    }
+    Object.defineProperty(Boss1.prototype, "getEmail", {
+        get: function () {
+            return "Email = ".concat(this._email);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Boss1.prototype, "setEmail", {
+        set: function (email) {
+            this._email = email;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Boss1.prototype, "setUni", {
+        set: function (uni) {
+            this._uni = uni;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Boss1.prototype.noAccess = function () {
+        console.log("Inside class only");
+    };
+    return Boss1;
+}());
+var Boss2 = /** @class */ (function (_super) {
+    __extends(Boss2, _super);
+    function Boss2() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.role = "X-Box";
+        return _this;
+    }
+    return Boss2;
+}(Boss1));
+var b1 = new Boss1("ali", "a@gmail.com");
+console.log(b1.name);
+console.log(b1.getEmail);
+b1.setEmail = "ha5403905@gmail.com";
+console.log(b1);
+var b2 = new Boss2("ali", "a@gmail.com");
+console.log(b2);
+//! Abstract Class
+// classes with no objectss
+// class can implements interface
+// class extends class
+// interface extends interface
+var takePhoto = /** @class */ (function () {
+    function takePhoto(cameraMode, filter) {
+        this.cameraMode = cameraMode;
+        this.filter = filter;
+    }
+    return takePhoto;
+}());
+var Instagram = /** @class */ (function (_super) {
+    __extends(Instagram, _super);
+    function Instagram(cameraMode, filter, name) {
+        var _this = _super.call(this, cameraMode, filter) || this;
+        _this.cameraMode = cameraMode;
+        _this.filter = filter;
+        _this.name = name;
+        return _this;
+    }
+    Instagram.prototype.getName = function () {
+        return this.name;
+    };
+    return Instagram;
+}(takePhoto));
+var tp = new Instagram("test", "test", "ali");
+console.log(tp.getName());
+//! 
+//! 
+//! 
+//! 
+//! 
+//! 
+//! 
+//! 
 //! 
 //! 
