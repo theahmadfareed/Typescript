@@ -89,10 +89,10 @@ const doubled1 = numbers1.map((n):number => n * 2); // double each number
 
 
 //! Objects
-function createUser({}):{name: string, age: number, sex: string}{
-    return {name: "ali", age: 25, sex: "male"}
+function createUser():{name: string, age: number, sex: string}{
+    return {name: "ali", age: 30, sex: "male"}
 }
-console.log(createUser({name:"ali", age:25}));
+console.log(createUser());
 
 
 
@@ -104,14 +104,135 @@ type User = {
     sex?: string
 }
 function createUser1(obj: User): User{
-    return {name: "ali", age: 30, sex: "male"}
+    return {name: obj.name, age: obj.age, sex: "male"}
 }
 console.log(createUser1({name:"ali", age:30}));
 
 
 
 //! Union
-//! 
+let score: number|string = 55;
+score = 10
+score = "10"
+
+type user = {id: number, user: string}
+type admin = {id: number, admin: string}
+
+let ali: user|admin = {id: 1, user: "ali"};
+ali = {id: 1, admin: "ali"};
+console.log(ali);
+
+
+function getDbId(id: number|string){
+    if(typeof id === 'number'){
+        console.log(`DB id is ${id}`);
+    }
+    else{
+        return id
+    }
+}
+getDbId(1);
+console.log(getDbId("1"));
+
+
+//! Arrays:
+// Arrays offer a way to store and manipulate collections of values of the same type. They
+// are defined using square brackets and can be populated with values at initialization, or
+// later using various methods such as push() , splice() , and concat() . Arrays can be of a
+// fixed length or dynamically resized as needed, and they can be used with various array
+// methods to perform common operations like sorting, filtering, and mapping.
+
+// create an array
+const numbers2: number[] = [1, 2, 3];
+let letters2: string[] = ["a", "b", "c"];
+let mix:(string|number|boolean)[] = [1,"b",true];
+// iterate over an array
+for (let n of numbers2) {
+ // ...
+}
+// array method examples
+numbers2.pop(); // remove last item
+const doubled2 = numbers2.map(n => n * 2); // double each number
+
+
+
+
+//! Tuples:
+// Tuples provide a way to express an array with a fixed number of elements of different
+// types, creating a data structure with multiple different types. They can be especially
+// handy when dealing with scenarios such as representing coordinates, storing key-value
+// pairs, or returning multiple values from a function. Since they are type-checked,
+// TypeScript can ensure that the values in the tuple are correct at compile time.
+
+
+// type aliases for clarity
+type Title1 = string;
+type PublishYear1 = number;
+
+// declare a tuple type
+let rgb:[number, number, number] =[255,255,255];
+let book1: [Title1, PublishYear1];
+
+// initialize a tuple
+book1 = ["sample", 1980];
+// return a tuple from a function
+function newBook1(): [Title1, PublishYear1] {
+    return ["test", 1999];
+}
+// destructure a tuple into two variables
+const [title1, published1] = newBook1();
+// "test", 1999
+
+
+
+
+
+//! Interface
+
+interface Student1{
+    readonly name: string,
+    email: string,
+    age: number,
+    sex?: string,
+    // getTrial: () => boolean
+    startTrial():boolean,
+    getCoupon(name: string, value: number):number
+}
+interface Student1{
+    hello():string,
+}
+interface Student2 extends Student1{
+    bye():string,
+}
+
+const std: Student2 = {
+    name: "Khalid",
+    email: "a@gmail.com",
+    age: 30,
+    sex: "male",
+    startTrial:()=>{return true},
+    getCoupon:(name:string,value:number)=>{
+        return value
+    },
+    hello:()=>{
+        return "Hello from Interfaces!"
+    },
+    bye:()=>{
+        return "Bye from Interfaces!"
+    }
+
+}
+// console.log(std);
+// console.log(std.name);
+// console.log(std.age);
+// console.log(std.email);
+// console.log(std.sex);
+// console.log(std.startTrial());
+// console.log(std.getCoupon(std.name,1));
+// console.log(std.hello());
+// console.log(std.bye());
+
+
 //! 
 //! 
 
