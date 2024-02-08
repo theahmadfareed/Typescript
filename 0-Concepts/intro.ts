@@ -35,40 +35,6 @@ console.log("Hello World from Typescript!");
 
 
 
-//! Functions
-// Functions:
-// TypeScript return type annotations on functions are optional, however you should
-// always include them. You can configure ESLint .eslintrc.json to emit an error if a
-// function is missing a return type by setting this rule:
-// write a function to add 2 nums:
-
-function someFunc(){
-    return "hola"
-}
-// We don't know the type of `value` here:
-let result2 = someFunc();
-// This makes things a bit clearer:
-let result3:string = someFunc();
-
-
-// using 'Function Declaration'
-function addNumbers(a:number, b:number):number{
-    return a + b;
-}
-console.log(addNumbers(5,5));
-// using 'Function Expression'
-const sum1 = function sum(lhs: number, rhs: number): number {
-    return lhs + rhs;
-}
-console.log(sum1(5,5));
-// using 'Arrow Functions'
-const sum2 = (lhs: number, rhs: number): number => {
-    return lhs + rhs;
-}
-console.log(sum2(5,5));
-
-
-
 
 //! Arrays:
 // Arrays offer a way to store and manipulate collections of values of the same type. They
@@ -90,79 +56,6 @@ const doubled1 = numbers1.map((n):number => n * 2); // double each number
 
 
 
-
-
-//! Objects
-function createUser():{name: string, age: number, sex: string}{
-    return {name: "ali", age: 30, sex: "male"}
-}
-console.log(createUser());
-
-
-
-
-
-//! Type Alisas 
-//! readonly, optional (?, &)
-type User = {
-    readonly name: string,
-    age: number,
-    sex?: string
-}
-function createUser1(obj: User): User{
-    return {name: obj.name, age: obj.age, sex: "male"}
-}
-console.log(createUser1({name:"ali", age:30}));
-
-
-
-
-
-//! Union
-let score: number|string = 55;
-score = 10
-score = "10"
-
-type user = {id: number, user: string}
-type admin = {id: number, admin: string}
-
-let ali: user|admin = {id: 1, user: "ali"};
-ali = {id: 1, admin: "ali"};
-console.log(ali);
-
-
-function getDbId(id: number|string){
-    if(typeof id === 'number'){
-        console.log(`DB id is ${id}`);
-    }
-    else{
-        return id
-    }
-}
-getDbId(1);
-console.log(getDbId("1"));
-
-
-
-
-//! Arrays:
-// Arrays offer a way to store and manipulate collections of values of the same type. They
-// are defined using square brackets and can be populated with values at initialization, or
-// later using various methods such as push() , splice() , and concat() . Arrays can be of a
-// fixed length or dynamically resized as needed, and they can be used with various array
-// methods to perform common operations like sorting, filtering, and mapping.
-
-// create an array
-const numbers2: number[] = [1, 2, 3];
-let letters2: string[] = ["a", "b", "c"];
-let mix:(string|number|boolean)[] = [1,"b",true];
-// iterate over an array
-for (let n of numbers2) {
- // ...
-}
-// array method examples
-numbers2.pop(); // remove last item
-const doubled2 = numbers2.map(n => n * 2); // double each number
 
 
 
@@ -192,6 +85,176 @@ function newBook1(): [Title1, PublishYear1] {
 // destructure a tuple into two variables
 const [title1, published1] = newBook1();
 // "test", 1999
+
+
+
+
+
+
+//! Functions
+// Functions:
+// TypeScript return type annotations on functions are optional, however you should
+// always include them. You can configure ESLint .eslintrc.json to emit an error if a
+// function is missing a return type by setting this rule:
+// write a function to add 2 nums:
+
+function someFunc(){
+    return "hola"
+}
+// We don't know the type of `value` here:
+let result2 = someFunc();
+// This makes things a bit clearer:
+let result3:string = someFunc();
+
+
+// using 'Function Declaration'
+function addNumbers(a:number, b:number):number{
+    return a + b;
+}
+// console.log(addNumbers(5,5));
+// using 'Function Expression'
+const sum1 = function sum(lhs: number, rhs: number): number {
+    return lhs + rhs;
+}
+// console.log(sum1(5,5));
+// using 'Arrow Functions'
+const sum2 = (lhs: number, rhs: number): number => {
+    return lhs + rhs;
+}
+// console.log(sum2(5,5));
+
+
+
+
+
+
+
+//! Objects
+function createUser():{name: string, age: number, sex: string}{
+    return {name: "ali", age: 30, sex: "male"}
+}
+// console.log(createUser());
+
+
+
+
+
+
+//! Type Alisas 
+//! readonly, optional (?, &)
+type User = {
+    readonly name: string,
+    age: number,
+    sex?: string
+}
+function createUser1(obj: User): User{
+    return {name: obj.name, age: obj.age, sex: "male"}
+}
+// console.log(createUser1({name:"ali", age:30}));
+
+
+
+
+
+
+//! Union
+let score: number|string = 55;
+score = 10
+score = "10"
+
+type user = {id: number, user: string}
+type admin = {id: number, admin: string}
+
+let ali: user|admin = {id: 1, user: "ali"};
+ali = {id: 1, admin: "ali"};
+// console.log(ali);
+
+
+function getDbId(id: number|string){
+    //Narrowing
+    if(typeof id === 'number'){
+        console.log(`DB id is ${id}`);
+    }
+    else{
+        return id
+    }
+}
+getDbId(1);
+// console.log(getDbId("1"));
+
+
+
+
+
+//! Intersection
+type Draggable = {
+    drag: ()=>void
+}
+type Resizable = {
+    reSize: ()=>void
+}
+type UIWidget = Draggable & Resizable
+let textBox: UIWidget = {
+    drag:()=>{
+    },
+    reSize:()=>{
+    },
+
+}
+
+
+
+
+
+//! Enum
+const enum Sizes {Small=1, Medium, Large};
+let mySize: Sizes = Sizes.Medium;
+// console.log("My Size = "+mySize);
+
+
+
+
+
+
+//! Literal Types
+type Quantity = 50|100
+type Metric = "cm"|"inch"
+
+let qnt: Quantity  = 100
+
+
+
+
+//! Nullable Types
+function nullAble(val: string|null|undefined){
+
+}
+nullAble(null);
+nullAble(undefined);
+
+
+
+
+//! Optional Chaining(?:,?.)
+type Customer = {
+    birthday:Date
+};
+
+function getCustomer(id: number): Customer|null|undefined{
+    return id===0 ? null : {birthday: new Date()}
+}
+let customer = getCustomer(0)
+
+// Optional Property access operator
+console.log(customer?.birthday?.getFullYear());
+
+// Optional Element access operator
+// if(customer?.[0])
+
+//Optional Call
+let log:any = null
+log?.("a")
+
 
 
 
@@ -272,13 +335,13 @@ class Boss2 extends Boss1{
 
 
 const b1 = new Boss1("ali", "a@gmail.com");
-console.log(b1.name);
-console.log(b1.getEmail);
+// console.log(b1.name);
+// console.log(b1.getEmail);
 b1.setEmail = "ha5403905@gmail.com";
-console.log(b1);
+// console.log(b1);
 
 const b2 = new Boss2("ali", "a@gmail.com");
-console.log(b2);
+// console.log(b2);
 
 
 
@@ -311,7 +374,7 @@ class Instagram extends takePhoto{
     }
 }
 const tp = new Instagram("test","test","ali");
-console.log(tp.getName());
+// console.log(tp.getName());
 
 
 
@@ -334,6 +397,9 @@ function getFood(pet: fish|bird){
         return "bird food"
     }
 }
+
+
+
 
 //! Discriminated Union and Exhaustiveness Checking with never
 

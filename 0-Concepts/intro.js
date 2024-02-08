@@ -84,6 +84,16 @@ function createUser1(obj) {
     return { name: obj.name, age: obj.age, sex: "male" };
 }
 console.log(createUser1({ name: "ali", age: 30 }));
+//! Enum
+var Sizes;
+(function (Sizes) {
+    Sizes[Sizes["Small"] = 1] = "Small";
+    Sizes[Sizes["Medium"] = 2] = "Medium";
+    Sizes[Sizes["Large"] = 3] = "Large";
+})(Sizes || (Sizes = {}));
+;
+var mySize = Sizes.Medium;
+console.log("My Size = " + mySize);
 //! Union
 var score = 55;
 score = 10;
@@ -235,13 +245,17 @@ var Instagram = /** @class */ (function (_super) {
 }(takePhoto));
 var tp = new Instagram("test", "test", "ali");
 console.log(tp.getName());
-//! 
-//! 
-//! 
-//! 
-//! 
-//! 
-//! 
-//! 
-//! 
-//! 
+function isFish(pet) {
+    return pet.swim !== undefined;
+}
+function getFood(pet) {
+    if (isFish(pet)) {
+        pet;
+        return "fish food";
+    }
+    else {
+        pet;
+        return "bird food";
+    }
+}
+//! Discriminated Union and Exhaustiveness Checking with never
