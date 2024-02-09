@@ -1,12 +1,8 @@
 console.log("Hello World from Typescript!");
 
-// Data Types.
-// let variableName:type = value
-
-
-
 
 //! Types in TS
+// let variableName:type = value
 /*  
  *  unknown, any, never
  *  null, void(undefined)
