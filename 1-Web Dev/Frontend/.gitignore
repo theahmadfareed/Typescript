@@ -1,0 +1,17 @@
+# Node.js dependencies
+node_modules/
+
+# Built files
+/dist/
+/out/
+/.next/
+/.nuxt/
+/angular/dist/
+
+# IDE files
+.idea/
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
